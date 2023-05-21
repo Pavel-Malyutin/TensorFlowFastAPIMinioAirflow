@@ -1,0 +1,4 @@
+/storage/
+/logs/dag_id=train_model/
+/logs/dag_processor_manager/
+/logs/scheduler/
