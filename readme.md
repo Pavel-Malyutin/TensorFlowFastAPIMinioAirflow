@@ -1,44 +1,46 @@
-## Демонстрационный пайплайн
+## This is a demo pypline 
+
+![img.png](img.png)
 
 #### Done
-- API с возможностью загрузки данных из CSV в Postgres.
-- ML модель с использованием TensorFlow
-- Обучение модели в Airflow с сохранением в S3 Minio. Модель обучается на CPU.
-- Predict с выгрузкой модели из S3 и сохранением результатов в БД с последующей возможностью выгрузки результатов в CSV.
-- docker-compose для запуска всех сервисов на базе штатного от Airflow.
+- API with the ability to load data from CSV to Postgres
+- TensorFLow ML model
+- The model is trained in Airflow with saving to S3 Minio. The model uses CPU for learning.
+- Predict pipeline with loading from S3. Results will be saved in DB. You can download them in CSV.
+- docker-compose is used to run all services. It is made on Airflow sample script
 
 #### TODO
-- Разделить train на стадии: получение данных >> обработка >> обучение и сохранение
-- Выбор версии для предсказаний
-- Модели данных для sqlalchemy
-- Корректная обработка ошибок
+- Split train to stages: get data >> prepare >> learn and save model
+- Selection of model versions for predictions
+- SQLAlchemy data models
+- Errors monitoring and processing
 
-#### Первый запуск
-Необходимо инициализировать базу данных для Airflow
+#### First launch
+Airflow database initialising
 ```shell
 docker-compose up airflow-init
 ```
 
-#### Запустить сервисы
+#### Run services
 ```shell
 docker-compose up
 ```
 
-#### Загрузить данные train + predict в API
-Старые данные стираются при каждой загрузке
+#### Train and predict data loading into API
+Old data will be overwritten every data load
 
 <http://0.0.0.0:8081/>
 
 
-#### Запустить train модели в Airflow
-Данные загружаются из БД
+#### Run model training in Airflow
+Data will save in Airflow
 Login `airflow`
 Password `airflow`
 
 <http://0.0.0.0:8080/>
 
 
-#### Модель будет сохранена в Minio
+#### Model will be saved in Minio
 Login `minio`
 Password `miniopass`
 
@@ -48,3 +50,5 @@ Password `miniopass`
 #### Predict
 После можно запустить predict через API и скачать результаты. Из Minio будет выгружена последняя загруженная модель, 
 данные будут сохранены в БД, могут быть выгружены в CSV через API
+Now you can run predict in API and download results. Last model version will be downloaded from Minio. 
+Predictions will be saved in DB and can be loaded from API to CVS
